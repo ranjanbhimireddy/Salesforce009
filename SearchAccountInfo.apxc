@@ -1,0 +1,22 @@
+public class SearchAccountInfo {
+     List<Account> results;
+     String nameSr;
+    public String getNameSr(){
+        return nameSr;
+    }
+    
+    public List<Account> getResults(){
+        return results;
+    }
+    public void setNameSr(String s){
+        nameSr=s;
+    }
+ 
+    
+    public PageReference showResults() {
+        results = [SELECT Id,name, owner.name FROM account WHere name =: nameSr];
+        System.debug(results);
+        return null;
+    }
+   
+}
