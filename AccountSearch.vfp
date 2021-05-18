@@ -1,0 +1,33 @@
+<apex:page controller="SearchAccountInfo" id="pg">
+    
+    <apex:form id="fm">
+     <apex:actionFunction name="callSearch"  action="{!showResults}"/>
+    <apex:pageBlock title="Search Account"  id="pb">
+        <apex:pageBlockSection id="ps">
+            <apex:inputText value="{!nameSr}"  id="tx"/>
+            <script>
+    function vslidateInput(){
+        //var name =document.getElementById('pg:fm:pb:ps:tx').value;
+        var ex = document.getElementById('{!$Component.tx}').value;
+		alert(ex.length);
+        if(ex.length==0){
+        alert('Please Enter the Name field to continue the search');
+        }else
+            {
+             callSearch();
+            }
+        
+    }
+    </script>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Show Results"   onclick="vslidateInput();return false;"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!results}" var="acc">
+        <apex:column value="{!acc.id}"/>
+         <apex:column value="{!acc.name}"/>
+            <apex:column value="{!acc.owner.name}"/>
+        </apex:pageBlockTable> 
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>
